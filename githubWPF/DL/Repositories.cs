@@ -21,5 +21,17 @@ namespace githubWPF.DL
                 return repositories;
             }
         }
+        public static async Task<List<Repository>> getAsync(String username)
+        {
+            using (var webClient = new System.Net.WebClient())
+            {
+                webClient.Encoding = Encoding.UTF8;
+                webClient.Headers.Add(System.Net.HttpRequestHeader.UserAgent, "request");
+                var json = await webClient.DownloadStringTaskAsync($"https://api.github.com/users/{username}/repos");
+                
+                List<Repository> repositories = JsonConvert.DeserializeObject<List<Repository>>(json);
+                return repositories;
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 using githubWPF.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,25 +23,22 @@ namespace githubWPF
     public partial class Skin : Window
     {
         public String Username { get; set; }
-        public List<Repository> Repos { get; set; } = new List<Repository>();
+        public ObservableCollection<Repository> Repos { get; set; } = new ObservableCollection<Repository>();
         public Skin(string user)
         {
             Username = user;
             InitializeComponent();
-            Load();
+            _ = Load();
         }
 
-        public async void Load()
+        public async Task Load()
         {
             await LoadRepos();
         }
         public async Task LoadRepos()
         {
-            var rep = Repositories.get(Username);
-            foreach (Repository r in rep)
-            {
-                Repos.Add(r);
-            }
+            var rep = await Repositories.getAsync(Username);
+            rep.ToList().ForEach(Repos.Add);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using githubWPF.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,8 @@ namespace githubWPF
     /// </summary>
     public partial class repositorys : UserControl
     {
-        public List<Repository> Repos { get; set; } = new List<Repository>();
-        public repositorys(List<Repository> repos)
+        public ObservableCollection<Repository> Repos { get; set; } = new ObservableCollection<Repository>();
+        public repositorys(ObservableCollection<Repository> repos)
         {
             Repos = repos;
             InitializeComponent();

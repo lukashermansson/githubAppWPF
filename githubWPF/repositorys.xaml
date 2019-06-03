@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="githubWPF.repositorys"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:githubWPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <DataGrid x:Name="dgrid" HeadersVisibility="Column" CanUserResizeRows="False" ItemsSource="{Binding Repos}"  AutoGenerateColumns="False" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" >
+        <DataGrid.Resources>
+            <Style TargetType="DataGridRow">
+                <!--<EventSetter Event="MouseDoubleClick" Handler="Row_clicked"/> -->
+            </Style>
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+            <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+            <DataGridTextColumn Header="Last updated"  Binding="{Binding Updated_At, StringFormat=\{0:yyyy-MM-dd\}}"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>
